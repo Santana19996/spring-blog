@@ -7,34 +7,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MathController {
-    @GetMapping("/add/{num1}/and/{num2}")
+
+    @GetMapping("/add/{x}/and/{y}")
     @ResponseBody
-    public String addNumbers(@PathVariable int num1, @PathVariable int num2) {
-        return num1 + num2 + " is the sum";
+    public int sum(@PathVariable int x, @PathVariable int y) {
+        return x + y;
     }
 
-    @GetMapping("/subtract/{num1}/from/{num2}")
+    @GetMapping("/subtract/{x}/from/{y}")
     @ResponseBody
-    public String subtractNumbers(@PathVariable int num1, @PathVariable int num2) {
-        return num1 - num2 + " is the difference";
-
+    public int difference(@PathVariable int x, @PathVariable int y) {
+        return y - x;
     }
 
-    @GetMapping("/multiply/{num1}/and/{num2}")
+    @GetMapping("/multiply/{x}/and/{y}")
     @ResponseBody
-    public String multiplyNumbers(@PathVariable int num1, @PathVariable int num2) {
-        return num1 * num2 + " is the product ";
-
+    public int product(@PathVariable int x, @PathVariable int y) {
+        return x * y;
     }
 
-
-    @GetMapping("/divide/{num1}/by/{num2}")
+    @GetMapping("/divide/{x}/by/{y}")
     @ResponseBody
-    public String divideNumbers(@PathVariable int num1, @PathVariable int num2) {
-        return num1 / num2 + " is the quotient ";
-
+    public int quotient(@PathVariable int x, @PathVariable int y) {
+        return x / y;
     }
-
 
 
 
