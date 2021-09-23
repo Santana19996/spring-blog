@@ -2,33 +2,33 @@ package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Random;
 
 @Controller
 public class RollDiceController {
+
     @GetMapping("/roll-dice")
-    public String ViewGuessNumberPage() {
-        return "GuessNumber";
+    public String rollDice() {
+        return "roll-dice";
     }
 
+    @GetMapping("/roll-dice/{n}")
+    public String rollDiceGuess(@PathVariable int n, Model model) {
 
-    @GetMapping("/roll-dice/{number}")
-    @ResponseBody
-    public String chooseNumber(@PathVariable int number,Model model) {
+        Random rand = new Random();
+        int random = rand.nextInt((6 - 1) + 1) + 1;
 
-        Random r = new Random();
-        int low = 1;
-        int high = 6;
-        int randomNumber = r.nextInt(high - low) + low;
-        model.addAttribute("diceRoll", randomNumber);
-        model.addAttribute("userGuess",number);
-        model.addAttribute("isCorrect",randomNumber == number);
-        return "You guessed " + number +"!" +
-                 "<br>" + "The correct guess was the number " + randomNumber;
+        model.addAttribute("diceRoll", random);
+        model.addAttribute("userGuess", n);
+        model.addAttribute("isCorrect", random == n);
+
+        return "roll-dice";
+
+
+
+
     }
-
-
 }
-
