@@ -1,6 +1,5 @@
 package com.codeup.springblog.controllers;
 
-
 import com.codeup.springblog.models.Ad;
 import com.codeup.springblog.repos.AdRepository;
 import org.springframework.stereotype.Controller;
@@ -48,11 +47,10 @@ public class AdController {
             @RequestParam(name = "description") String description
     ) {
 
-        Ad adToSubmitToDB = new Ad(title,description);
+        Ad adToSubmitToDB = new Ad(title, description);
 
         adDao.save(adToSubmitToDB);
 
         return "redirect:/ads";
     }
-
 }

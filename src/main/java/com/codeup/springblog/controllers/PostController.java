@@ -1,13 +1,13 @@
 package com.codeup.springblog.controllers;
 
 
+import com.codeup.springblog.models.Ad;
 import com.codeup.springblog.models.Post;
+
+import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,19 @@ import java.util.List;
 @Controller
 public class PostController {
 
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
+
     @GetMapping("/posts")
     public String showPosts(Model model) {
         List<Post> allPosts = new ArrayList<>();
 
         allPosts.add(new Post("post!", "post1 body"));
-        allPosts.add(new Post("post@", "post2 body"));
+       allPosts.add(new Post("post@", "post2 body"));
+        allPosts = postDao.findAll();
 
         model.addAttribute("posts", allPosts);
         return "post/index";
@@ -37,15 +44,25 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
+
     public String showCreatePostForm() {
-        return "view form for creating a new post";
+        return "post/create";
     }
 
+
+
+
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createAd(
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body
+    ) {
+
+        Post adToSubmitToDB = new Post(title, body);
+
+        postDao.save(adToSubmitToDB);
+
+        return "redirect:/posts";
     }
 
 }
