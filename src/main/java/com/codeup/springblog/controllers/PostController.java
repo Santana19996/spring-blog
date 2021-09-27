@@ -26,7 +26,7 @@ public class PostController {
         List<Post> allPosts = new ArrayList<>();
 
         allPosts.add(new Post("post!", "post1 body"));
-       allPosts.add(new Post("post@", "post2 body"));
+        allPosts.add(new Post("post@", "post2 body"));
         allPosts = postDao.findAll();
 
         model.addAttribute("posts", allPosts);
@@ -50,8 +50,6 @@ public class PostController {
     }
 
 
-
-
     @PostMapping("/posts/create")
     public String createAd(
             @RequestParam(name = "title") String title,
@@ -63,6 +61,45 @@ public class PostController {
         postDao.save(adToSubmitToDB);
 
         return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/edit/{id}")
+    public String showEditPostForm(@PathVariable long id, Model model) {
+        Post postToEdit = postDao.getById(id);
+        model.addAttribute("post", postToEdit);
+
+        return "post/edit";
+    }
+@PostMapping("/posts/edit/{id}")
+    public String editAd(
+        @RequestParam(name = "title") String title,
+        @RequestParam(name = "body") String body,
+
+
+        @PathVariable Long id) {
+
+        Post adToSubmitToDB = new Post( id,title, body);
+
+        postDao.save(adToSubmitToDB);
+
+        return "redirect:/posts";
+
+
+    }
+
+
+
+    @PostMapping("/posts/delete/{id}")
+    public String deleteAd(
+            @PathVariable Long id) {
+Post postToDelete = postDao.getById(id);
+
+
+        postDao.delete(postToDelete);
+
+        return "redirect:/posts";
+
+
     }
 
 }
