@@ -1,4 +1,3 @@
-
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.User;
@@ -46,6 +45,6 @@ public class UsersController {
         return "User Created";
     }
 
-    // Anything that has to do with users will go in here.
+
 
 }

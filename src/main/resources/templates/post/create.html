@@ -2,19 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Ad</title>
 </head>
 <body>
 
-
 <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-    Title:
-    <input th:field="*{title}" />
-    <br />
-    Description:
-    <input th:field="*{body}" />
-    <br />
-    <input type="submit" />
+
+    <input type="text" th:field="*{title}" placeholder="title">
+    <input th:field="*{body}" type="text" placeholder="body">
+    <input type="submit">
+
 </form>
 
 </body>

@@ -1,5 +1,6 @@
 package com.codeup.springblog.models;
 
+import com.codeup.springblog.models.Post;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,20 +23,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Post> posts;
 
-    public User(Long id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-    }
-
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public User() {
-
     }
 
     public Long getId() {
@@ -70,5 +58,3 @@ public class User {
         this.posts = posts;
     }
 }
-
-

@@ -2,20 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Post</title>
 </head>
 <body>
 
-<h1>Edit Post</h1>
+<form th:action="@{|/posts/edit/${id}|}" th:method="post" th:object="${postToEdit}">
 
-<form th:action="@{|/posts/edit/${id}|}" method="post" th:object="${postToEdit}">
-
-    <input type="text" name="title" placeholder="title" th:field="*{title}">
-    <input type="text" name="body" placeholder="body" th:field="*{body}">
+    <input type="text" th:field="*{title}" placeholder="title">
+    <input type="text" th:field="*{body}" placeholder="body">
     <input type="submit">
 
 </form>
-
 
 </body>
 </html>
