@@ -1,11 +1,13 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Ad;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.AdRepository;
+import com.codeup.springblog.repos.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -13,8 +15,11 @@ public class AdController {
 
     private final AdRepository adDao;
 
-    public AdController(AdRepository adDao) {
+    private final UserRepository userDao;
+
+    public AdController(AdRepository adDao, UserRepository userDao) {
         this.adDao = adDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/ads")
@@ -47,10 +52,18 @@ public class AdController {
             @RequestParam(name = "description") String description
     ) {
 
-        Ad adToSubmitToDB = new Ad(title, description);
+        User hardCodedUser = userDao.getById(1L);
+
+//        Ad adToSubmitToDB = new Ad(title,description,hardCodedUser);
+
+        Ad adToSubmitToDB = new Ad();
+        adToSubmitToDB.setTitle(title);
+        adToSubmitToDB.setDescription(description);
+        adToSubmitToDB.setOwner(hardCodedUser);
 
         adDao.save(adToSubmitToDB);
 
         return "redirect:/ads";
     }
+
 }

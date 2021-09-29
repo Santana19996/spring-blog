@@ -3,7 +3,6 @@ package com.codeup.springblog.models;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
-
 @Entity
 @Table(name = "ads")
 public class Ad {
@@ -18,6 +17,10 @@ public class Ad {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
+
     public Ad() {
     }
 
@@ -31,6 +34,13 @@ public class Ad {
         this.title = title;
         this.description = description;
     }
+
+    public Ad(String title, String description, User owner) {
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+    }
+
 
     public Long getId() {
         return id;
@@ -54,5 +64,13 @@ public class Ad {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

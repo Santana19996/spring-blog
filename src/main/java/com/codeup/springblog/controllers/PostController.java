@@ -1,10 +1,11 @@
 package com.codeup.springblog.controllers;
 
 
-import com.codeup.springblog.models.Ad;
+
 import com.codeup.springblog.models.Post;
 
 import com.codeup.springblog.repos.PostRepository;
+import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,11 @@ import java.util.List;
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
@@ -30,7 +33,7 @@ public class PostController {
         allPosts = postDao.findAll();
 
         model.addAttribute("posts", allPosts);
-        return "post/index";
+        return "/post";
     }
 
     @GetMapping("/posts/{id}")
@@ -45,21 +48,30 @@ public class PostController {
 
     @GetMapping("/posts/create")
 
-    public String showCreatePostForm() {
+    public String showCreatePostForm(Model model) {
+        model.addAttribute("post", new Post());
         return "post/create";
     }
 
+//Old way
+//    @PostMapping("/posts/create")
+//    public String createAd(
+//            @RequestParam(name = "title") String title,
+//            @RequestParam(name = "body") String body
+//    ) {
+//
+//
+//        Post adToSubmitToDB = new Post(title, body);
+//
+//        postDao.save(adToSubmitToDB);
+//
+//        return "redirect:/posts";
+//    }
 
     @PostMapping("/posts/create")
-    public String createAd(
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body
-    ) {
-
-        Post adToSubmitToDB = new Post(title, body);
-
-        postDao.save(adToSubmitToDB);
-
+    public String create(@ModelAttribute Post post) {
+        post.setOwner(userDao.getById(1L));
+        postDao.save(post);
         return "redirect:/posts";
     }
 
@@ -70,15 +82,16 @@ public class PostController {
 
         return "post/edit";
     }
-@PostMapping("/posts/edit/{id}")
+
+    @PostMapping("/posts/edit/{id}")
     public String editAd(
-        @RequestParam(name = "title") String title,
-        @RequestParam(name = "body") String body,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body,
 
 
-        @PathVariable Long id) {
+            @PathVariable Long id) {
 
-        Post adToSubmitToDB = new Post( id,title, body);
+        Post adToSubmitToDB = new Post(id, title, body);
 
         postDao.save(adToSubmitToDB);
 
@@ -88,11 +101,10 @@ public class PostController {
     }
 
 
-
     @PostMapping("/posts/delete/{id}")
     public String deleteAd(
             @PathVariable Long id) {
-Post postToDelete = postDao.getById(id);
+        Post postToDelete = postDao.getById(id);
 
 
         postDao.delete(postToDelete);
