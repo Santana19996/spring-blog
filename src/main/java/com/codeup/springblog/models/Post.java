@@ -3,22 +3,33 @@ package com.codeup.springblog.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 public class Post {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String title;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User owner;
+    @JoinColumn (name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private User users;
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
 
     public Post() {
     }
@@ -34,12 +45,10 @@ public class Post {
         this.body = body;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public Post(String title, String body, User user) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
     }
 
     public String getTitle() {
@@ -58,11 +67,19 @@ public class Post {
         this.body = body;
     }
 
-    public User getOwner() {
-        return owner;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public Long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

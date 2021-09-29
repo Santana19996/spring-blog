@@ -1,8 +1,7 @@
 //package com.codeup.springblog.models;
 //
-//import org.springframework.stereotype.Controller;
-//
 //import javax.persistence.*;
+//
 //@Entity
 //@Table(name = "ads")
 //public class Ad {

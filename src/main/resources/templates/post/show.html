@@ -11,6 +11,7 @@
   <div th:text="${postId}">Id</div>
   <div th:text="${post.title}">Title</div>
   <div th:text="${post.body}">Body</div>
+  <p th:text="${'Created By: ' + post.user.username}"></p>
   <a th:href="@{|/posts/edit/${postId}|}">Edit Post</a>
   <form th:action="@{|/posts/delete/${postId}|}" th:method="post">
     <button type="submit">Delete</button>
