@@ -12,12 +12,6 @@
     <h3 th:text="${post.title}">Title</h3>
     <div th:text="${post.body}"></div>
     <a th:href="@{|/posts/edit/${post.id}|}">Edit Post</a>
-
-    <form th:action="@{|/posts/delete/${post.id}|}" method="post" name="button">
-        <div class="form-group">
-        <button type="submit" class="btn btn-danger">Delete</button>
-        </div>
-    </form>
 </div>
 <a href="/posts/create">Create Post</a>
 </body>

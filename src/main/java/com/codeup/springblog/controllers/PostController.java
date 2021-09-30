@@ -48,11 +48,11 @@ public class PostController {
     public String createPost(@ModelAttribute Post postToAdd) {
 
         postToAdd.setUser(userDao.getById(1L));
-emailService.prepareAndSend(
-        postToAdd,
-        "New Post",
-        "You created a Post"
-);
+        emailService.prepareAndSend(
+                postToAdd,
+                "New Post",
+                "You created a Post"
+        );
         postDao.save(postToAdd);
         return "redirect:/posts";
     }

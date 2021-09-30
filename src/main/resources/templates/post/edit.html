@@ -5,7 +5,7 @@
     <title>Edit Post</title>
 </head>
 <body>
-
+<h2>Edit Post</h2>
 <form th:action="@{|/posts/edit/${id}|}" th:method="post" th:object="${postToEdit}">
 
     <input type="text" th:field="*{title}" placeholder="title">
@@ -13,6 +13,11 @@
     <input type="submit">
 
 </form>
-
+<h2>Delete Post</h2>
+<form th:action="@{|/posts/delete/${post.id}|}" method="post" name="button">
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+</form>
 </body>
 </html>
