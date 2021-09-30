@@ -21,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegisterForm(Model vModel) {
-        vModel.addAttribute("user", new User());
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new User());
         return "users/register";
     }
 

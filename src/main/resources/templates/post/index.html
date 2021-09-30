@@ -9,10 +9,24 @@
 <h2>Viewing All Posts</h2>
 
 <div th:each="post : ${posts}">
-    <h3 th:text="${post.title}">Title</h3>
-    <div th:text="${post.body}"></div>
-    <a th:href="@{|/posts/edit/${post.id}|}">Edit Post</a>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card" style="width:18rem">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h3 th:text="${post.title}">Title</h3></li>
+                    <li class="list-group-item"><p th:text="${post.body}"></p></li>
+                    <li class="list-group-item"><a th:href="@{|/posts/${post.id}|}" th:text="${post.getUser()}"></a>
+                    </li>
+                    <li class="list-group-item"><a th:href="@{|/posts/edit/${post.id}|}">Edit Post</a></li>
+                </ul>
+                <br>
+            </div>
+        </div>
+    </div>
 </div>
+
 <a href="/posts/create">Create Post</a>
 </body>
 </html>
+

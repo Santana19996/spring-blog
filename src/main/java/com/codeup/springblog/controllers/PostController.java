@@ -1,5 +1,4 @@
 package com.codeup.springblog.controllers;
-
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;

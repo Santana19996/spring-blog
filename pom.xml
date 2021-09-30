@@ -12,7 +12,7 @@
     <artifactId>spring-blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-blog</name>
-    <description>spring-blog</description>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -31,8 +31,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -41,7 +39,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
